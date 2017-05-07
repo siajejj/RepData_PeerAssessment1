@@ -1,5 +1,4 @@
-Reproducible Research - Course Project 1
-====================================================
+# Reproducible Research: Peer Assessment 1
 
 ### Library requirements
 
@@ -67,7 +66,7 @@ lapply(libraries, library, character.only = TRUE)
 rm(libraries)
 ```
 
-### Loading and preprocessing the data
+## Loading and preprocessing the data
 
 First of all we load the data needed for the assignment. Data is downloaded to a subdirectory "data" in the working directory.
 
@@ -126,8 +125,9 @@ df.activityInterval <- ddply(df.activity, "interval", summarize,
                              )
 ```
 
-## Analysis
-### Part 1: Mean total number of steps taken per day
+
+## What is mean total number of steps taken per day?
+
 In the first part of the assignment we answer the question of what the mean total number of steps taken per day is.
 For this part of the assignment, we ignore the missing values in the dataset.
 
@@ -152,7 +152,7 @@ ggplot(df.activityDay, aes(x=date, y=totStepsPerDay)) +
 ## Warning: Removed 8 rows containing missing values (position_stack).
 ```
 
-![](RepResearch_CP1_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 #### Mean and median total number of steps taken per day
 We calculate the mean and median total number of steps taken per day. 
@@ -178,7 +178,7 @@ medianStepsPerDay
 ## [1] 10765
 ```
 
-### Part 2: Average daily activity pattern
+## What is the average daily activity pattern?
 
 This part of the assignment addresses the question of What the average daily activity pattern is.
 
@@ -201,7 +201,7 @@ ggplot(data=df.activityInterval, aes(x=interval, y=avgStepsPerInterval)) +
   labs(x="5-minute interval", y="Number of steps")
 ```
 
-![](RepResearch_CP1_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 Secondly, we want to knoow which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps.
 
@@ -215,7 +215,8 @@ subset(df.activityInterval, avgStepsPerInterval == max(avgStepsPerInterval))
 ```
 
 
-### Part 3: Imputing missing values
+## Imputing missing values
+
 Now we impute values for all cases where we have missing values.
 
 #### Occurrence of missing values
@@ -242,7 +243,7 @@ ggplot(data=df.activityInterval, aes(x=interval, y=medianStepsPerInterval)) +
   labs(x="5-minute interval", y="Number of steps")
 ```
 
-![](RepResearch_CP1_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 There seems to be a large variation between the 5-minute intervals, and in many cases the median is equal to zero. The mean value per interval seems to be a more appropriate strategy for imputation.
 
@@ -273,7 +274,7 @@ ggplot(df.activityImputDay, aes(x=date, y=totStepsPerDay)) +
     labs(x="Date", y="Number of steps")
 ```
 
-![](RepResearch_CP1_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 We now calculate the mean and median total number of steps taken per day. 
 
@@ -327,7 +328,9 @@ without imputation.
 
 As we can see, the mean value is unchanged. This is not so surprising as we used the mean value for the imputation. The median value is sligtly higher, since the days which earlier was excluded from the calculation due to missing values now have a total amount that is a bit higher than the "original" median.
 
-### Part 4: Differences in activity patterns between weekdays and weekends
+
+
+## Are there differences in activity patterns between weekdays and weekends?
 
 This part of the assignment addresses the question if there are differences in activity patterns between weekdays and weekends. For this part we use the dataset with the filled-in missing values.
 
@@ -361,8 +364,6 @@ g + geom_line(aes(group=1), size = 1) +
     labs(x="5-minute interval", y="Number of steps")
 ```
 
-![](RepResearch_CP1_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
 
 The most notable difference is in the mornings, which has a higher average rate in the early morning hours and a more distinct peak level at around 8-9 AM.  
-
-
